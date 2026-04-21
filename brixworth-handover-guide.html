@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Handover &mdash; Brixworth Osteopathic Clinic</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink: #1a1a1a;
+    --ink-muted: #555;
+    --ink-light: #888;
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --border: #e4e2dc;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --done: #16a34a;
+    --done-light: #f0fdf4;
+    --warn: #d97706;
+    --warn-light: #fffbeb;
+    --danger: #dc2626;
+    --danger-light: #fef2f2;
+    --tag-you: #7c3aed;
+    --tag-you-bg: #f5f3ff;
+    --tag-them: #0369a1;
+    --tag-them-bg: #f0f9ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  .doc-header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+  }
+
+  .doc-header .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--ink-light);
+    margin-bottom: 10px;
+  }
+
+  .doc-header h1 {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+  }
+
+  .doc-header p {
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+
+  .overview {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 44px;
+  }
+
+  .overview h2 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--ink-light);
+    margin-bottom: 16px;
+  }
+
+  .overview-steps {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .overview-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .overview-row:last-child { border-bottom: none; }
+
+  .overview-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .overview-text { flex: 1; }
+
+  .overview-title {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .overview-sub {
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.3px;
+  }
+
+  .tag-you { background: var(--tag-you-bg); color: var(--tag-you); }
+  .tag-them { background: var(--tag-them-bg); color: var(--tag-them); }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step-number {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--ink);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .step-header-text { flex: 1; }
+
+  .step-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .step-meta {
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+
+  .step-body {
+    padding: 22px 24px;
+  }
+
+  .step-body p {
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  .step-body p:last-child { margin-bottom: 0; }
+
+  .step-body code {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: var(--bg);
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--ink);
+  }
+
+  .substeps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .substeps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    padding: 12px 14px;
+    background: var(--bg);
+    border-radius: 7px;
+    border: 1px solid var(--border);
+  }
+
+  .substeps li .check {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    margin-top: 1px;
+    background: white;
+  }
+
+  .substeps li .sub-text { flex: 1; line-height: 1.5; }
+
+  .substeps li .sub-text strong {
+    display: block;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .substeps li .sub-text span {
+    color: var(--ink-muted);
+    font-size: 13px;
+  }
+
+  .substeps li .sub-text code {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    background: white;
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    color: var(--ink);
+  }
+
+  .callout {
+    display: flex;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 7px;
+    font-size: 13px;
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+
+  .callout-icon { flex-shrink: 0; font-size: 15px; margin-top: 1px; font-weight: 600; }
+  .callout-body { flex: 1; }
+  .callout-body strong { display: block; font-weight: 600; margin-bottom: 2px; }
+  .callout-body code {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .callout-info { background: var(--accent-light); color: #1e40af; border: 1px solid #bfdbfe; }
+  .callout-info code { background: white; border: 1px solid #bfdbfe; }
+  .callout-warn { background: var(--warn-light); color: #92400e; border: 1px solid #fde68a; }
+  .callout-warn code { background: white; border: 1px solid #fde68a; }
+  .callout-done { background: var(--done-light); color: #14532d; border: 1px solid #bbf7d0; }
+  .callout-done code { background: white; border: 1px solid #bbf7d0; }
+  .callout-danger { background: var(--danger-light); color: #991b1b; border: 1px solid #fecaca; }
+  .callout-danger code { background: white; border: 1px solid #fecaca; }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .resource-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    padding: 6px 12px;
+    background: var(--accent-light);
+    border-radius: 5px;
+    border: 1px solid #bfdbfe;
+    margin-top: 10px;
+    margin-right: 6px;
+    text-decoration: none;
+  }
+
+  .resource-link:hover { background: #dbeafe; text-decoration: none; }
+
+  .section-gap { margin-top: 44px; margin-bottom: 20px; }
+
+  .context-notice {
+    background: var(--tag-you-bg);
+    border: 1px solid #ddd6fe;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+
+  .context-notice h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tag-you);
+    margin-bottom: 8px;
+  }
+
+  .context-notice p {
+    font-size: 14px;
+    color: #4c1d95;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .context-notice p:last-child { margin-bottom: 0; }
+
+  .doc-footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--ink-light);
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 28px 18px 60px; }
+    .step-header { padding: 16px 18px; }
+    .step-body { padding: 16px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="doc-header">
+    <div class="eyebrow">Website handover</div>
+    <h1>Brixworth Osteopathic Clinic &mdash; transferring ownership</h1>
+    <p>A step-by-step guide for transferring the site, its hosting, and its code repository into your ownership.</p>
+  </div>
+
+  <!-- Context -->
+  <div class="context-notice">
+    <h3>Who this guide is for</h3>
+    <p>This document is for the developer taking over maintenance of the Brixworth Osteopathic Clinic website. It covers the one-time transfer of ownership only &mdash; for ongoing reference about how the site is built and maintained, see the <code>README.md</code> in the code repository.</p>
+    <p>Work through the steps in order. Some of them need to happen at specific points relative to others, so skipping ahead can cause brief outages.</p>
+  </div>
+
+  <!-- Overview -->
+  <div class="overview">
+    <h2>What's involved</h2>
+    <div class="overview-steps">
+      <div class="overview-row">
+        <div class="overview-num">1</div>
+        <div class="overview-text">
+          <div class="overview-title">Create the accounts you'll need <span class="tag tag-them">You do this</span></div>
+          <div class="overview-sub">GitHub account and Netlify team, if you don't already have them</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <div class="overview-num">2</div>
+        <div class="overview-text">
+          <div class="overview-title">Receive the GitHub repository <span class="tag tag-them">You do this</span></div>
+          <div class="overview-sub">Accept the repository transfer so the code is now under your account</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <div class="overview-num">3</div>
+        <div class="overview-text">
+          <div class="overview-title">Receive the Netlify site <span class="tag tag-them">You do this</span></div>
+          <div class="overview-sub">Accept the site transfer so hosting, DNS, forms, and CMS users all move across</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <div class="overview-num">4</div>
+        <div class="overview-text">
+          <div class="overview-title">Reconnect the GitHub integration <span class="tag tag-them">You do this</span></div>
+          <div class="overview-sub">Authorise Netlify to access the repository under your account</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <div class="overview-num">5</div>
+        <div class="overview-text">
+          <div class="overview-title">Set up a new GitHub OAuth app for the CMS <span class="tag tag-them">You do this</span></div>
+          <div class="overview-sub">Replace the existing OAuth app so the CMS login is fully yours</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <div class="overview-num">6</div>
+        <div class="overview-text">
+          <div class="overview-title">Verify everything works <span class="tag tag-them">You do this</span></div>
+          <div class="overview-sub">Check the site, the CMS login, a content edit, the forms, and the build pipeline</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Before you begin -->
+  <div class="section-label">Before you begin</div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number" style="background: var(--accent);">i</div>
+      <div class="step-header-text">
+        <div class="step-title">What you're taking on</div>
+        <div class="step-meta">Context for the rest of the guide</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>The website is built with <strong>Gatsby</strong> (a React-based static site generator), hosted on <strong>Netlify</strong>, with the code in a private <strong>GitHub</strong> repository. The client can edit blog articles through an admin interface at <code>/admin</code> on the live site, powered by <strong>Netlify CMS</strong>. Contact form submissions go through <strong>Netlify Forms</strong> and arrive by email.</p>
+      <p>There is no database. Each time content is updated, Netlify rebuilds the entire site from the code and publishes the new version. This takes around a minute or two per build.</p>
+
+      <div class="callout callout-info">
+        <div class="callout-icon">ℹ</div>
+        <div class="callout-body"><strong>The README has the detail</strong> For a full explanation of the stack, how it all fits together, how to run it locally, and how to maintain it, read <code>README.md</code> in the repository. This guide focuses only on getting ownership transferred cleanly.</div>
+      </div>
+
+      <div class="callout callout-warn">
+        <div class="callout-icon">!</div>
+        <div class="callout-body"><strong>One constraint worth knowing upfront</strong> The CMS authentication uses Netlify Identity, a service Netlify has deprecated (existing instances still work, but no new ones can be created). This means <strong>the Netlify site transfer feature is the only clean handover path</strong>. Rebuilding the site from scratch on a fresh Netlify account would leave the CMS unable to authenticate. The steps below are sequenced to avoid this.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Steps -->
+  <div class="section-gap"></div>
+  <div class="section-label">The handover, step by step</div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">1</div>
+      <div class="step-header-text">
+        <div class="step-title">Create the accounts you'll need</div>
+        <div class="step-meta">You do this &mdash; 5 to 10 minutes <span class="tag tag-them">You do this</span></div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>You'll need a GitHub account and a Netlify account. If you already have personal ones you're comfortable using for this, they're fine. Otherwise, create them now.</p>
+
+      <ul class="substeps">
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>GitHub account</strong>
+            <span>Sign up at <a href="https://github.com/signup" target="_blank">github.com/signup</a>. A free personal account is sufficient. Make a note of the username &mdash; you'll need to share it in step 2.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Netlify account</strong>
+            <span>Sign up at <a href="https://app.netlify.com/signup" target="_blank">app.netlify.com/signup</a>. You'll be prompted to create a team &mdash; a free Starter team is fine. Sign up using your GitHub account if you want; it makes later steps slightly smoother.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Share both with Gideon</strong>
+            <span>He'll need your GitHub username (for the repo transfer) and the email address on your Netlify account (for the site transfer).</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">2</div>
+      <div class="step-header-text">
+        <div class="step-title">Receive the GitHub repository</div>
+        <div class="step-meta">You do this &mdash; a few minutes <span class="tag tag-them">You do this</span></div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Gideon will initiate a repository transfer from his GitHub account to yours. You'll receive an email from GitHub asking you to accept.</p>
+
+      <ul class="substeps">
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Accept the transfer</strong>
+            <span>Open the email from GitHub and click the link to accept. Alternatively, log in to GitHub and look for the pending transfer notification at the top of your dashboard.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Confirm the repo appears in your account</strong>
+            <span>The repository should now be at <code>https://github.com/&lt;your-username&gt;/brixworth-osteo</code>. All commit history, branches, and settings come with it.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="callout callout-info">
+        <div class="callout-icon">ℹ</div>
+        <div class="callout-body"><strong>The repo name stays as <code>brixworth-osteo</code></strong> The CMS config file inside the repo references this name. If you rename the repo later, you'll need to update <code>static/admin/config.yml</code> to match &mdash; the README covers this.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">3</div>
+      <div class="step-header-text">
+        <div class="step-title">Receive the Netlify site</div>
+        <div class="step-meta">You do this &mdash; a few minutes <span class="tag tag-them">You do this</span></div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Gideon will transfer the Netlify site to your Netlify team. You'll receive an email and an in-app notification.</p>
+
+      <ul class="substeps">
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Accept the transfer in Netlify</strong>
+            <span>Log in to Netlify and look for the pending transfer notification, or follow the link in the email. Confirm acceptance.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>What moves across automatically</strong>
+            <span>Deploy history, the live site, custom domain, DNS zone, Netlify Forms submissions, form notification settings, Netlify Identity users (the client and their assistant), Git Gateway configuration, and build settings. Essentially, the site continues running exactly as it did, just under your account.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>One thing that doesn't move</strong>
+            <span>The connection between the Netlify site and the GitHub repository. That's reconnected in the next step. Until then, the site is still live &mdash; new commits just won't trigger builds.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="callout callout-done">
+        <div class="callout-icon">&check;</div>
+        <div class="callout-body"><strong>No DNS changes are needed</strong> The domain is already using Netlify DNS, and the nameservers continue to point to Netlify throughout &mdash; only the underlying team ownership changes. The site stays live the entire time.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">4</div>
+      <div class="step-header-text">
+        <div class="step-title">Reconnect the GitHub integration</div>
+        <div class="step-meta">You do this &mdash; a few minutes <span class="tag tag-them">You do this</span></div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Netlify needs permission from your GitHub account to read the repository and trigger builds when you push commits. This permission is user-specific, so it needs re-authorising under your account.</p>
+
+      <ul class="substeps">
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Open the site's build settings in Netlify</strong>
+            <span>In the transferred site, go to <strong>Site configuration &rarr; Build &amp; deploy &rarr; Continuous deployment</strong>. You should see a prompt to reconnect or reauthorise GitHub access.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Authorise Netlify on GitHub</strong>
+            <span>Follow the prompts. You'll be bounced to GitHub to approve the Netlify app for your account and grant it access to the <code>brixworth-osteo</code> repository. Approve it.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Trigger a test build</strong>
+            <span>Back in Netlify, go to <strong>Deploys</strong> and click <strong>Trigger deploy &rarr; Deploy site</strong>. Watch the build log. If it completes successfully, the integration is working.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">5</div>
+      <div class="step-header-text">
+        <div class="step-title">Set up a new GitHub OAuth app for the CMS</div>
+        <div class="step-meta">You do this &mdash; 10 minutes <span class="tag tag-them">You do this</span></div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>The CMS admin login offers "Log in with GitHub" as an option. That flow depends on a GitHub OAuth app &mdash; currently one that belongs to Gideon. You'll create a fresh one under your account and swap it in, so nothing is left tied to him.</p>
+
+      <div class="callout callout-warn">
+        <div class="callout-icon">!</div>
+        <div class="callout-body"><strong>Brief CMS login disruption during this step</strong> Between disabling the old OAuth app and enabling the new one, the "Log in with GitHub" option in the CMS will not work. The public website is unaffected. Plan to do this when the client is not trying to edit content.</div>
+      </div>
+
+      <ul class="substeps" style="margin-top: 20px;">
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Create a new OAuth app on GitHub</strong>
+            <span>Go to <a href="https://github.com/settings/developers" target="_blank">GitHub &rarr; Settings &rarr; Developer settings &rarr; OAuth Apps</a> and click <strong>New OAuth App</strong>.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Fill in the OAuth app details</strong>
+            <span>Application name: something like <em>Brixworth Osteopathic Clinic CMS</em>. Homepage URL: the site's live URL. Authorization callback URL: <code>https://api.netlify.com/auth/done</code> (this is a Netlify endpoint &mdash; don't change it). Click <strong>Register application</strong>.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Generate a client secret</strong>
+            <span>On the app's page, click <strong>Generate a new client secret</strong>. Copy both the <strong>Client ID</strong> and the new <strong>Client Secret</strong> into a safe place &mdash; the secret will only be shown once.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Paste them into Netlify Identity settings</strong>
+            <span>In the Netlify site, go to <strong>Integrations &rarr; Identity &rarr; Settings and usage &rarr; External providers</strong>. Find the existing GitHub provider and edit it. Replace the Client ID and Client Secret with the new values. Save.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Test the CMS login</strong>
+            <span>Go to <code>https://&lt;the-site&gt;/admin</code> in a private browser window. Click <strong>Log in with GitHub</strong>, authorise the new OAuth app when prompted, and confirm the CMS loads. If it does, the swap worked.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Let Gideon know</strong>
+            <span>Once verified, tell Gideon that the swap is complete. He'll delete the old OAuth app from his GitHub account.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="callout callout-info">
+        <div class="callout-icon">ℹ</div>
+        <div class="callout-body"><strong>Why the callback URL is a Netlify address</strong> Netlify acts as an intermediary for the OAuth flow so that the CMS doesn't need its own backend server. This is standard for Netlify-hosted CMS setups &mdash; <code>api.netlify.com/auth/done</code> is shared by all Netlify sites using GitHub OAuth.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">6</div>
+      <div class="step-header-text">
+        <div class="step-title">Verify everything works</div>
+        <div class="step-meta">You do this &mdash; 15 minutes <span class="tag tag-them">You do this</span></div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Before calling the handover complete, run through this checklist end-to-end. If anything fails, stop and troubleshoot before moving on.</p>
+
+      <ul class="substeps">
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>The live site loads</strong>
+            <span>Visit the site in a browser. Check the homepage, a few internal pages, and an existing blog article. Everything should render normally.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>A code change triggers a build</strong>
+            <span>Clone the repository locally (or edit a file directly on GitHub), make a trivial change like updating a comment, commit, and push. Watch the Netlify Deploys tab &mdash; a new deploy should start within seconds and complete successfully.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>CMS login via GitHub works</strong>
+            <span>Already tested in step 5, but worth confirming again from a fresh browser session.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Existing CMS users can still log in</strong>
+            <span>Ask the client to log in to <code>/admin</code> using their existing Netlify Identity email credentials. They should be able to edit an article and publish it successfully. The publish action should trigger a new Netlify build.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Contact form submission arrives</strong>
+            <span>Submit the contact form on the live site with test content. Confirm the submission appears in Netlify under <strong>Forms</strong>, and that the notification email reaches the client's email address as expected.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check"></div>
+          <div class="sub-text">
+            <strong>Domain resolves correctly</strong>
+            <span>The domain should continue to point to the site with a valid SSL certificate. Check <strong>Domain management</strong> in Netlify &mdash; the custom domain should be listed as primary, with HTTPS enabled and a valid certificate.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="callout callout-done">
+        <div class="callout-icon">&check;</div>
+        <div class="callout-body"><strong>If everything above passes, the handover is complete</strong> You now fully own the site, the code, the hosting, the CMS, and the OAuth integration. Nothing is left tied to Gideon's accounts.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- After handover -->
+  <div class="section-gap"></div>
+  <div class="section-label">After the handover</div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number" style="background: var(--done);">&check;</div>
+      <div class="step-header-text">
+        <div class="step-title">Ongoing responsibilities</div>
+        <div class="step-meta">What's now on your plate</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <ul class="substeps">
+        <li>
+          <div class="check" style="border-color: #bbf7d0; background: #f0fdf4;"></div>
+          <div class="sub-text">
+            <strong>Hosting costs</strong>
+            <span>Netlify's Starter plan is free and handles this site's traffic comfortably. If the client's traffic grows or additional features are needed, you may need to upgrade.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check" style="border-color: #bbf7d0; background: #f0fdf4;"></div>
+          <div class="sub-text">
+            <strong>Domain renewal</strong>
+            <span>The domain is registered separately at its registrar &mdash; ask the client for those details. Renewal reminders usually come by email to whoever's on the registrar account.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check" style="border-color: #bbf7d0; background: #f0fdf4;"></div>
+          <div class="sub-text">
+            <strong>Security of your accounts</strong>
+            <span>Enable two-factor authentication on both GitHub and Netlify. Both the site's source code and its hosting are now accessible through those accounts.</span>
+          </div>
+        </li>
+        <li>
+          <div class="check" style="border-color: #bbf7d0; background: #f0fdf4;"></div>
+          <div class="sub-text">
+            <strong>Ongoing maintenance</strong>
+            <span>The README documents the current state of the stack, including several dependencies that are due for upgrade. Work through those at a pace you're comfortable with. None are urgent but they'll become more pressing over time.</span>
+          </div>
+        </li>
+      </ul>
+
+      <a class="resource-link" href="#">↗ See README.md in the repository for ongoing reference</a>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <p>If anything in this guide is unclear, or if a step doesn't behave as described, reach out before proceeding &mdash; a short conversation is much cheaper than an unexplained outage.</p>
+  </div>
+
+</div>
+</body>
+</html>
