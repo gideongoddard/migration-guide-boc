@@ -286,7 +286,7 @@
 
   .callout-icon { flex-shrink: 0; font-size: 15px; margin-top: 1px; font-weight: 600; }
   .callout-body { flex: 1; }
-  .callout-body strong { display: inline-block; font-weight: 600; margin-bottom: 2px; }
+  .callout-body strong { display: block; font-weight: 600; margin-bottom: 2px; }
   .callout-body code {
     font-family: 'DM Mono', monospace;
     font-size: 12px;
@@ -452,7 +452,7 @@
 
       <div class="callout callout-warn">
         <div class="callout-icon">!</div>
-        <div class="callout-body"><strong>One constraint worth knowing upfront:</strong> The CMS authentication uses Netlify Identity, a service Netlify has deprecated (existing instances still work, but no new ones can be created). This means <strong>the Netlify site transfer feature is the only clean handover path</strong>. Rebuilding the site from scratch on a fresh Netlify account would leave the CMS unable to authenticate. The steps below are sequenced to avoid this.</div>
+        <div class="callout-body"><strong>One constraint worth knowing upfront</strong> The CMS authentication uses Netlify Identity, a service Netlify has deprecated (existing instances still work, but no new ones can be created). This means <em>the Netlify site transfer feature is the only clean handover path</em>. Rebuilding the site from scratch on a fresh Netlify account would leave the CMS unable to authenticate. The steps below are sequenced to avoid this.</div>
       </div>
     </div>
   </div>
